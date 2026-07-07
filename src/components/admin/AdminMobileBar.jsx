@@ -3,10 +3,10 @@ import { useAuth } from '../../context/AuthContext'
 import { useRouter } from '../../context/RouterContext'
 
 const MOBILE_NAV_ITEMS = [
-  { name: 'home', label: 'Beranda', active: true },
-  { name: 'library_books', label: 'Katalog' },
-  { name: 'location_on', label: 'Lokasi' },
-  { name: 'person', label: 'Profil' },
+  { view: 'dashboard', name: 'home', label: 'Beranda' },
+  { view: 'books', name: 'library_books', label: 'Katalog' },
+  { view: 'locations', name: 'location_on', label: 'Lokasi' },
+  { view: 'visitors', name: 'person', label: 'Profil' },
 ]
 
 export function AdminMobileTopBar() {
@@ -32,23 +32,26 @@ export function AdminMobileTopBar() {
   )
 }
 
-export function AdminMobileNav() {
+export function AdminMobileNav({ activeView, onNavigate }) {
   return (
     <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface border-t border-outline-variant shadow-md md:hidden">
-      {MOBILE_NAV_ITEMS.map((item) => (
-        <a
-          key={item.name}
-          href="#"
-          className={`flex flex-col items-center justify-center rounded-full px-4 py-1 ${
-            item.active
-              ? 'bg-secondary-container text-on-secondary-container'
-              : 'text-on-surface-variant hover:bg-surface-variant transition-all'
-          }`}
-        >
-          <Icon name={item.name} />
-          <span className="font-label-sm text-label-sm">{item.label}</span>
-        </a>
-      ))}
+      {MOBILE_NAV_ITEMS.map((item) => {
+        const active = activeView === item.view
+        return (
+          <button
+            key={item.name}
+            onClick={() => onNavigate(item.view)}
+            className={`flex flex-col items-center justify-center rounded-full px-4 py-1 ${
+              active
+                ? 'bg-secondary-container text-on-secondary-container'
+                : 'text-on-surface-variant hover:bg-surface-variant transition-all'
+            }`}
+          >
+            <Icon name={item.name} />
+            <span className="font-label-sm text-label-sm">{item.label}</span>
+          </button>
+        )
+      })}
     </nav>
   )
 }

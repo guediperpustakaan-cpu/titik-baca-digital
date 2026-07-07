@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const VISITORS = [
   {
     initials: 'AN',
@@ -31,7 +33,43 @@ const VISITORS = [
   },
 ]
 
-export default function VisitorMonitorTable() {
+const MORE_VISITORS = [
+  {
+    initials: 'DW',
+    avatarClass: 'bg-primary-fixed text-primary',
+    name: 'Dewi Lestari',
+    id: '48230',
+    book: 'Sejarah Palembang Modern',
+    start: '13:20 WIB',
+    status: 'Aktif',
+    statusClass: 'bg-surface-container-highest text-primary',
+  },
+  {
+    initials: 'RA',
+    avatarClass: 'bg-secondary-fixed text-on-secondary-container',
+    name: 'Rangga Aditya',
+    id: '48241',
+    book: 'Kuliner Palembang',
+    start: '13:02 WIB',
+    status: 'Idle',
+    statusClass: 'bg-surface-container-low text-on-surface-variant',
+  },
+  {
+    initials: 'FS',
+    avatarClass: 'bg-tertiary-fixed text-tertiary',
+    name: 'Fitri Sari',
+    id: '48255',
+    book: 'Sajak Musi',
+    start: '12:48 WIB',
+    status: 'Aktif',
+    statusClass: 'bg-surface-container-highest text-primary',
+  },
+]
+
+export default function VisitorMonitorTable({ onDetail }) {
+  const [showAll, setShowAll] = useState(false)
+  const rows = showAll ? [...VISITORS, ...MORE_VISITORS] : VISITORS
+
   return (
     <section className="mt-xl bg-surface border border-outline-variant rounded-xl shadow-[0px_2px_4px_rgba(0,0,0,0.05)] overflow-hidden">
       <div className="p-lg flex justify-between items-center border-b border-outline-variant">
@@ -62,7 +100,7 @@ export default function VisitorMonitorTable() {
             </tr>
           </thead>
           <tbody className="divide-y divide-outline-variant">
-            {VISITORS.map((v) => (
+            {rows.map((v) => (
               <tr key={v.id} className="hover:bg-background transition-colors">
                 <td className="px-lg py-md">
                   <div className="flex items-center gap-3">
@@ -91,7 +129,10 @@ export default function VisitorMonitorTable() {
                   </span>
                 </td>
                 <td className="px-lg py-md">
-                  <button className="text-primary hover:underline font-label-sm">
+                  <button
+                    onClick={() => onDetail?.(v)}
+                    className="text-primary hover:underline font-label-sm"
+                  >
                     Detail
                   </button>
                 </td>
@@ -102,9 +143,14 @@ export default function VisitorMonitorTable() {
       </div>
 
       <div className="p-lg bg-surface-container-low flex justify-center">
-        <button className="text-primary font-label-md flex items-center gap-2 hover:gap-3 transition-all">
-          Lihat Semua Aktivitas
-          <span className="material-symbols-outlined">arrow_forward</span>
+        <button
+          onClick={() => setShowAll((v) => !v)}
+          className="text-primary font-label-md flex items-center gap-2 hover:gap-3 transition-all"
+        >
+          {showAll ? 'Sembunyikan' : 'Lihat Semua Aktivitas'}
+          <span className="material-symbols-outlined">
+            {showAll ? 'expand_less' : 'arrow_forward'}
+          </span>
         </button>
       </div>
     </section>

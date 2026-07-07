@@ -3,24 +3,34 @@ import { useAuth } from '../../context/AuthContext'
 import { useRouter } from '../../context/RouterContext'
 
 const NAV_ITEMS = [
-  { label: 'Dashboard', icon: 'dashboard', active: true },
-  { label: 'Kelola Buku', icon: 'menu_book' },
-  { label: 'Lokasi', icon: 'map' },
-  { label: 'Pengunjung', icon: 'group' },
+  { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
+  { id: 'books', label: 'Kelola Buku', icon: 'menu_book' },
+  { id: 'locations', label: 'Lokasi', icon: 'map' },
+  { id: 'visitors', label: 'Pengunjung', icon: 'group' },
 ]
 
 const FOOTER_ITEMS = [
-  { label: 'Pengaturan', icon: 'settings' },
-  { label: 'Keluar', icon: 'logout', danger: true },
+  { id: 'settings', label: 'Pengaturan', icon: 'settings' },
+  { id: 'logout', label: 'Keluar', icon: 'logout', danger: true },
 ]
 
-export default function AdminSideNav() {
+export default function AdminSideNav({ activeView, onNavigate }) {
   const { logout } = useAuth()
   const { navigate } = useRouter()
 
   function handleLogout() {
     logout()
     navigate('#login')
+  }
+
+  function handleItem(item) {
+    if (item.danger) {
+      handleLogout()
+    } else if (item.id === 'settings') {
+      onNavigate('settings')
+    } else {
+      onNavigate(item.id)
+    }
   }
 
   return (
@@ -35,27 +45,30 @@ export default function AdminSideNav() {
       </div>
 
       <nav className="flex-1 space-y-2">
-        {NAV_ITEMS.map((item) => (
-          <a
-            key={item.label}
-            href="#"
-            className={
-              item.active
-                ? 'flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-transform active:translate-x-1'
-                : 'flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg'
-            }
-          >
-            <Icon name={item.icon} />
-            <span className="font-label-md text-label-md">{item.label}</span>
-          </a>
-        ))}
+        {NAV_ITEMS.map((item) => {
+          const active = activeView === item.id
+          return (
+            <button
+              key={item.id}
+              onClick={() => onNavigate(item.id)}
+              className={
+                active
+                  ? 'w-full flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-transform active:translate-x-1'
+                  : 'w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg'
+              }
+            >
+              <Icon name={item.icon} />
+              <span className="font-label-md text-label-md">{item.label}</span>
+            </button>
+          )
+        })}
       </nav>
 
       <div className="pt-md border-t border-outline-variant mt-auto space-y-2">
         {FOOTER_ITEMS.map((item) =>
           item.danger ? (
             <button
-              key={item.label}
+              key={item.id}
               onClick={handleLogout}
               className="w-full flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-colors rounded-lg text-error"
             >
@@ -63,15 +76,15 @@ export default function AdminSideNav() {
               <span className="font-label-md text-label-md">{item.label}</span>
             </button>
           ) : (
-            <a
-              key={item.label}
-              href="#"
-              className="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg"
+            <button
+              key={item.id}
+              onClick={() => handleItem(item)}
+              className="w-full flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg"
             >
               <Icon name={item.icon} />
               <span className="font-label-md text-label-md">{item.label}</span>
-            </a>
-          )
+            </button>
+          ),
         )}
       </div>
     </aside>

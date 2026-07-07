@@ -1,5 +1,6 @@
 import { Icon } from '../Icon'
 import { useAuth } from '../../context/AuthContext'
+import { useRouter } from '../../context/RouterContext'
 
 const NAV_ITEMS = [
   { label: 'Dashboard', icon: 'dashboard', active: true },
@@ -15,10 +16,11 @@ const FOOTER_ITEMS = [
 
 export default function AdminSideNav() {
   const { logout } = useAuth()
+  const { navigate } = useRouter()
 
   function handleLogout() {
     logout()
-    window.location.hash = '#login'
+    navigate('#login')
   }
 
   return (

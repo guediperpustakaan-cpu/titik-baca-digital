@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Icon } from './Icon'
+import { useRouter } from '../context/RouterContext'
 
 const MENU_ITEMS = [
   { label: 'Profil Saya', icon: 'person' },
@@ -11,6 +12,7 @@ const MENU_ITEMS = [
 export default function AppBar() {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
+  const { navigate } = useRouter()
 
   useEffect(() => {
     if (!open) return
@@ -62,6 +64,14 @@ export default function AppBar() {
           </a>
         </nav>
 
+        <button
+          onClick={() => navigate('#login')}
+          className="flex items-center gap-2 text-primary font-label-md border border-outline-variant rounded-full px-4 py-2 hover:bg-surface-container-low transition-colors"
+        >
+          <Icon name="lock" />
+          <span>Masuk Admin</span>
+        </button>
+
         <div className="relative" ref={menuRef}>
           <button
             aria-label="Akun"
@@ -103,6 +113,22 @@ export default function AppBar() {
             </div>
           )}
         </div>
+      </div>
+
+      <div className="flex md:hidden items-center gap-1">
+        <button
+          onClick={() => navigate('#login')}
+          className="p-2 text-primary"
+          aria-label="Masuk Admin"
+        >
+          <Icon name="lock" />
+        </button>
+        <button
+          aria-label="Akun"
+          className="material-symbols-outlined text-primary p-2 rounded-full"
+        >
+          account_circle
+        </button>
       </div>
     </header>
   )

@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Icon } from '../components/Icon'
 import { useAuth } from '../context/AuthContext'
+import { useRouter } from '../context/RouterContext'
 
 export default function AdminLogin() {
   const { login } = useAuth()
+  const { navigate } = useRouter()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -20,7 +22,7 @@ export default function AdminLogin() {
       setError(result.error)
       return
     }
-    window.location.hash = '#admin'
+    navigate('#admin')
   }
 
   return (

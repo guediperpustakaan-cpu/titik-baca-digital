@@ -3,6 +3,7 @@ import AppBar from './components/AppBar'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminLogin from './pages/AdminLogin'
 import { useAuth } from './context/AuthContext'
+import { useRouter } from './context/RouterContext'
 import ValidationCard from './components/ValidationCard'
 import LocationCard from './components/LocationCard'
 import FeaturedBooks from './components/FeaturedBooks'
@@ -53,38 +54,31 @@ function Hero({ children }) {
 
 export default function App() {
   const { user } = useAuth()
+  const { route, navigate } = useRouter()
   const [successOpen, setSuccessOpen] = useState(false)
-  const [route, setRoute] = useState(
-    typeof window !== 'undefined' ? window.location.hash : '',
-  )
 
   useEffect(() => {
-    function onHash() {
-      setRoute(window.location.hash)
+    if (route === '#admin' && !user) {
+      navigate('#login')
     }
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [])
+  }, [route, user, navigate])
+
+  useEffect(() => {
+    if (!successOpen) return
+    const timer = setTimeout(() => {
+      navigate('#catalog')
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [successOpen, navigate])
 
   if (route === '#login') {
     return <AdminLogin />
   }
 
   if (route === '#admin') {
-    if (!user) {
-      window.location.hash = '#login'
-      return null
-    }
+    if (!user) return null
     return <AdminDashboard />
   }
-
-  useEffect(() => {
-    if (!successOpen) return
-    const timer = setTimeout(() => {
-      window.location.href = '#catalog'
-    }, 2000)
-    return () => clearTimeout(timer)
-  }, [successOpen])
 
   return (
     <div className="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">

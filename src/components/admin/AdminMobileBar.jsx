@@ -1,5 +1,6 @@
 import { Icon } from '../Icon'
 import { useAuth } from '../../context/AuthContext'
+import { useRouter } from '../../context/RouterContext'
 
 const MOBILE_NAV_ITEMS = [
   { name: 'home', label: 'Beranda', active: true },
@@ -10,6 +11,7 @@ const MOBILE_NAV_ITEMS = [
 
 export function AdminMobileTopBar() {
   const { logout } = useAuth()
+  const { navigate } = useRouter()
 
   return (
     <header className="md:hidden sticky top-0 z-50 flex justify-between items-center px-margin-mobile py-4 w-full bg-surface border-b border-outline-variant shadow-sm">
@@ -21,7 +23,7 @@ export function AdminMobileTopBar() {
         aria-label="Keluar"
         onClick={() => {
           logout()
-          window.location.hash = '#login'
+          navigate('#login')
         }}
       >
         <Icon name="account_circle" />

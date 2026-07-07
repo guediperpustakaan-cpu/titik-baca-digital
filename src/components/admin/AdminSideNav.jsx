@@ -1,4 +1,5 @@
 import { Icon } from '../Icon'
+import { useAuth } from '../../context/AuthContext'
 
 const NAV_ITEMS = [
   { label: 'Dashboard', icon: 'dashboard', active: true },
@@ -13,6 +14,13 @@ const FOOTER_ITEMS = [
 ]
 
 export default function AdminSideNav() {
+  const { logout } = useAuth()
+
+  function handleLogout() {
+    logout()
+    window.location.hash = '#login'
+  }
+
   return (
     <aside className="hidden md:flex flex-col h-screen fixed left-0 top-0 p-md w-64 bg-surface-container-low border-r border-outline-variant z-50">
       <div className="mb-xl">
@@ -42,20 +50,27 @@ export default function AdminSideNav() {
       </nav>
 
       <div className="pt-md border-t border-outline-variant mt-auto space-y-2">
-        {FOOTER_ITEMS.map((item) => (
-          <a
-            key={item.label}
-            href="#"
-            className={`flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-colors rounded-lg ${
-              item.danger
-                ? 'text-error'
-                : 'text-on-surface-variant'
-            }`}
-          >
-            <Icon name={item.icon} />
-            <span className="font-label-md text-label-md">{item.label}</span>
-          </a>
-        ))}
+        {FOOTER_ITEMS.map((item) =>
+          item.danger ? (
+            <button
+              key={item.label}
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-surface-variant transition-colors rounded-lg text-error"
+            >
+              <Icon name={item.icon} />
+              <span className="font-label-md text-label-md">{item.label}</span>
+            </button>
+          ) : (
+            <a
+              key={item.label}
+              href="#"
+              className="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg"
+            >
+              <Icon name={item.icon} />
+              <span className="font-label-md text-label-md">{item.label}</span>
+            </a>
+          )
+        )}
       </div>
     </aside>
   )

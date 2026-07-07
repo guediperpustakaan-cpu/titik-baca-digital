@@ -1,4 +1,5 @@
 import { Icon } from '../Icon'
+import { useAuth } from '../../context/AuthContext'
 
 const MOBILE_NAV_ITEMS = [
   { name: 'home', label: 'Beranda', active: true },
@@ -8,12 +9,21 @@ const MOBILE_NAV_ITEMS = [
 ]
 
 export function AdminMobileTopBar() {
+  const { logout } = useAuth()
+
   return (
     <header className="md:hidden sticky top-0 z-50 flex justify-between items-center px-margin-mobile py-4 w-full bg-surface border-b border-outline-variant shadow-sm">
       <h1 className="font-headline-md text-headline-md font-bold text-primary">
         Titik Baca
       </h1>
-      <button className="p-2 text-primary" aria-label="Akun">
+      <button
+        className="p-2 text-primary"
+        aria-label="Keluar"
+        onClick={() => {
+          logout()
+          window.location.hash = '#login'
+        }}
+      >
         <Icon name="account_circle" />
       </button>
     </header>

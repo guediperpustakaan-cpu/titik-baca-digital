@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import AppBar from './components/AppBar'
+import AdminDashboard from './pages/AdminDashboard'
 import ValidationCard from './components/ValidationCard'
 import LocationCard from './components/LocationCard'
 import FeaturedBooks from './components/FeaturedBooks'
@@ -50,6 +51,21 @@ function Hero({ children }) {
 
 export default function App() {
   const [successOpen, setSuccessOpen] = useState(false)
+  const [route, setRoute] = useState(
+    typeof window !== 'undefined' ? window.location.hash : '',
+  )
+
+  useEffect(() => {
+    function onHash() {
+      setRoute(window.location.hash)
+    }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  if (route === '#admin') {
+    return <AdminDashboard />
+  }
 
   useEffect(() => {
     if (!successOpen) return

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Titik Baca Digital - Palembang</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#d5e3fd",
+                    "surface-dim": "#ccdbf4",
+                    "tertiary": "#303539",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#dde9ff",
+                    "surface-container": "#e6eeff",
+                    "on-primary-fixed": "#001453",
+                    "on-surface-variant": "#444653",
+                    "surface-tint": "#3755c3",
+                    "secondary-fixed-dim": "#a4c9ff",
+                    "background": "#f8f9ff",
+                    "on-background": "#0d1c2f",
+                    "on-secondary-fixed": "#001c39",
+                    "inverse-surface": "#233144",
+                    "on-primary-container": "#a8b8ff",
+                    "secondary-fixed": "#d4e3ff",
+                    "secondary": "#0060ac",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-error": "#ffffff",
+                    "surface": "#f8f9ff",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c4c5d5",
+                    "primary-fixed-dim": "#b8c4ff",
+                    "inverse-primary": "#b8c4ff",
+                    "primary-container": "#1e40af",
+                    "tertiary-fixed-dim": "#c3c7cb",
+                    "on-secondary-fixed-variant": "#004883",
+                    "surface-container-highest": "#d5e3fd",
+                    "tertiary-fixed": "#dfe3e7",
+                    "on-primary-fixed-variant": "#173bab",
+                    "outline": "#757684",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#00288e",
+                    "on-tertiary-container": "#b8bcc0",
+                    "primary-fixed": "#dde1ff",
+                    "on-surface": "#0d1c2f",
+                    "tertiary-container": "#474c4f",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "on-secondary-container": "#003c70",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#64a8fe",
+                    "on-tertiary-fixed-variant": "#43474b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#171c1f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "base": "4px",
+                    "gutter": "24px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "2xl": "48px",
+                    "3xl": "64px",
+                    "md": "16px",
+                    "container-max": "1280px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-xl-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #eff4ff 25%, #d5e3fd 50%, #eff4ff 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top AppBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center px-margin-mobile md:px-gutter w-full max-w-container-max mx-auto bg-surface border-b border-outline-variant py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">library_books</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Titik Baca Digital</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<nav class="flex gap-6">
+<a class="text-primary font-bold border-b-2 border-primary" href="#">Beranda</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="#">Katalog</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="#">Lokasi</a>
+</nav>
+<button class="material-symbols-outlined text-primary p-2 rounded-full hover:bg-surface-container-low transition-colors">account_circle</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center relative px-margin-mobile py-xl">
+<!-- Background Decoration -->
+<div class="absolute inset-0 -z-10 overflow-hidden">
+<div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-surface-container rounded-full blur-3xl opacity-60"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-80 h-80 bg-primary-fixed-dim rounded-full blur-3xl opacity-30"></div>
+</div>
+<!-- Hero Content Section -->
+<div class="max-w-4xl w-full text-center space-y-lg fade-in">
+<div class="flex flex-col items-center gap-4 mb-xl">
+<img class="w-24 h-24 object-contain mb-4" data-alt="Official logo of Dinas Perpustakaan dan Kearsipan Kota Palembang, featuring a professional crest with local cultural motifs in professional blue and white colors, set against a clean minimalist white background. The logo signifies authority, wisdom, and the digital transformation of public archives." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQKb8IarJKlx2dygCcdHVRcOCsfnp0L6YYZjsaaRj9cpCJovZ6gsAtC0q3Qo6zQ4Kz8P-Pg9AaqOP1EtVToaJApNILRTJaZV-mRJylCt9__lVzMgnUTe8WnEcCSFkIoKbGMW6PjX1ovKtG1TpNb3NX_ixJHSszdJFQkCc2bZDG5vVAiCPz6S7djK0TZawekPOlLcHUrBHzJEHK_QDqYV5Rf8s1310WiuzwI4esZOFJV8TgIPefoF1h"/>
+<p class="text-primary font-label-md uppercase tracking-widest">Dinas Perpustakaan dan Kearsipan Kota Palembang</p>
+<h2 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-background tracking-tight">
+                    Akses Literasi <span class="text-primary">Kapanpun, Di Manapun.</span>
+</h2>
+<p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">
+                    Selamat datang di Titik Baca Digital. Temukan ribuan koleksi buku digital eksklusif langsung dari perangkat Anda di lokasi-lokasi strategis kota Palembang.
+                </p>
+</div>
+<!-- Action Card (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md w-full">
+<!-- Primary Action -->
+<div class="bg-surface-container-lowest border border-outline-variant p-xl rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col items-center text-center space-y-md">
+<div class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined" style="font-size: 32px;">qr_code_scanner</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Masuk ke Katalog</h3>
+<p class="text-on-surface-variant text-body-sm">Pastikan Anda berada di area Titik Baca Digital untuk mengakses koleksi.</p>
+<!-- Validation State Controls -->
+<div class="w-full pt-md" id="action-container">
+<button class="w-full py-4 bg-primary text-on-primary font-label-md rounded-xl hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-2" id="btn-validate">
+<span class="material-symbols-outlined">near_me</span>
+                            Scan QR &amp; Cek Lokasi
+                        </button>
+</div>
+<!-- Loading State (Hidden) -->
+<div class="hidden w-full pt-md flex flex-col items-center gap-3" id="loading-state">
+<div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+<p class="text-on-surface-variant animate-pulse font-label-sm">Memverifikasi lokasi GPS...</p>
+</div>
+<!-- Error State (Hidden) -->
+<div class="hidden w-full p-4 bg-error-container text-on-error-container rounded-lg border border-error flex items-start gap-3 text-left" id="error-state">
+<span class="material-symbols-outlined mt-0.5">error</span>
+<div>
+<p class="font-bold text-label-md">Gagal Memverifikasi</p>
+<p class="text-sm" id="error-message">Anda berada di luar jangkauan Titik Baca (Maks 300m)</p>
+</div>
+</div>
+</div>
+<!-- Secondary Info -->
+<div class="bg-surface-container-low border border-outline-variant p-xl rounded-xl flex flex-col justify-between overflow-hidden relative group">
+<div class="relative z-10 space-y-md">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-secondary-fixed rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined">map</span>
+</div>
+<span class="bg-success-container text-success px-3 py-1 rounded-full text-label-sm font-bold bg-green-100 text-green-700">12 Titik Aktif</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Cari Lokasi Terdekat</h3>
+<p class="text-on-surface-variant text-body-sm">Lihat daftar lokasi perpustakaan digital di taman kota, halte, dan area publik lainnya di Palembang.</p>
+<button class="text-primary font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                            Lihat Peta <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Abstract Map Decoration -->
+<div class="absolute -bottom-10 -right-10 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 200px;">explore</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Section (Modern Horizontal Scroll) -->
+<div class="w-full max-w-container-max mt-3xl space-y-md">
+<div class="flex justify-between items-end">
+<h4 class="font-headline-md text-headline-md border-l-4 border-primary pl-md">Buku Terpopuler</h4>
+<a class="text-primary text-label-md font-bold" href="#">Lihat Semua</a>
+</div>
+<div class="flex gap-md overflow-x-auto pb-4 scroll-smooth no-scrollbar">
+<!-- Book Card 1 -->
+<div class="flex-shrink-0 w-44 space-y-sm">
+<div class="aspect-[3/4] rounded-xl border border-outline-variant overflow-hidden shadow-sm hover:scale-[1.02] transition-transform bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A professional book cover design for an Indonesian literature piece about Palembang history. The cover features minimalist artistic illustrations of the Ampera Bridge during sunset, with clean modern typography in navy blue and gold accents. High-end professional publishing aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5h3PS9IimnHwMaRx_oFtuJbZsQ5sq1gWxWslEq9BenhB0ocljkpzrqKIAXfRwHN1C6BM0aQlLxfytJvlt50l2OSc-kQbQ1JasXj4eCX9EzH_zI6V-8GvuxJM2yeYflpBwnPiYhT17Q1UG6eskZGfFf1PmRsWB8dAyE1EpYmE_2KMGtlQvLAdQgErs-5EDj0to0z5zEu_SsX6MNpOBdS0FFiRI8dVI6SPpWJd9KE766vItW10SZUwS"/>
+</div>
+<div class="space-y-1">
+<p class="font-label-md text-on-surface truncate">Sejarah Palembang</p>
+<p class="text-on-surface-variant text-label-sm">Dinas Arsip</p>
+</div>
+</div>
+<!-- Book Card 2 -->
+<div class="flex-shrink-0 w-44 space-y-sm">
+<div class="aspect-[3/4] rounded-xl border border-outline-variant overflow-hidden shadow-sm hover:scale-[1.02] transition-transform bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Modern educational book cover for technology and innovation, titled Digital Transformation in Modern Cities. The design features abstract geometric lines and patterns in shades of primary blue and vibrant teal. Sleek, authoritative, and clean layout for a professional library archive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkqIuCxGuuAA_ePSCsvS5hKEaF6cefS-IXvsCepBi3lu8e0Eu0cahos9gCD-14SBpvr8deMLPuXQ1GLwmqH23OX-ocJtuaj621nFTR07p2M2OU0YOuKIqg0n0ViSYervRqzF3YWUA-tBHtxuaB-f8pIs3SM_tgpsjHcACLo0DI9hMbu55Sl_qfhMofqFahycVVqXBdsoyQ3ufV12gg8lT8p3PsCdf17ZQm0nDYCIqpVx6kAgAV-5wp"/>
+</div>
+<div class="space-y-1">
+<p class="font-label-md text-on-surface truncate">Teknologi Masa Depan</p>
+<p class="text-on-surface-variant text-label-sm">Prof. Wiryawan</p>
+</div>
+</div>
+<!-- Book Card 3 -->
+<div class="flex-shrink-0 w-44 space-y-sm">
+<div class="aspect-[3/4] rounded-xl border border-outline-variant overflow-hidden shadow-sm hover:scale-[1.02] transition-transform bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Vibrant culinary arts book cover titled Flavors of South Sumatra. The cover displays a high-quality food photography of traditional Palembang dishes like Pempek, artistically arranged on premium ceramic ware. Warm, inviting lighting with elegant serif typography in deep maroon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKz2hlu9EmzxFtWcQsFPQLpKY2qSY7-lZs21H0Su9V6T4f_75hAKjQU4Orb0Vtsksxh3u6DvW3y78IEEIK0RQ5YXRGHUhgZTe9Y3EJDAhG8llSvDrBx1IazaBFyScmPm_01v-1mcdkca1HOA8UjRt-msFA83ugM0lUma-kRH-jVDXBdjPtIBG_wr70n-yky2DlIF_f8UTUAwJWxzBFJMyFJibSMtW1THV1g7SRytcSuXAKpe7Ofsbj"/>
+</div>
+<div class="space-y-1">
+<p class="font-label-md text-on-surface truncate">Kuliner Palembang</p>
+<p class="text-on-surface-variant text-label-sm">Tim Kuliner</p>
+</div>
+</div>
+<!-- Book Card 4 -->
+<div class="flex-shrink-0 w-44 space-y-sm">
+<div class="aspect-[3/4] rounded-xl border border-outline-variant overflow-hidden shadow-sm hover:scale-[1.02] transition-transform bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Classic poetry and literature book cover with a soft, ethereal watercolor background in light blue and grey tints. Delicate pen-and-ink illustrations of local flora. Title in handwritten script font, creating a calm and intellectual mood for a digital library collection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIPJMpRET2Z3SQj7xY89tTvokrXQir51uz7M4r0L7P82n_5HcSYo09_xmXAoQWatFkhXFnu_CcQ8Dyebo38wJuo32gCBYcmS6NSg3SMXSo8UBWenTg4-EVy10WHUKjJDSZqi8cqNoTM93YKtz5l60pbfRYZoYH9_d5JBSMVe7xukI6xpbWd3i-UHULuqYZcvvZW5MpY6dc0H9SF9sms5lJ9a0bHPrVvMqcT-BzRcz5EeBg5epHN4Js"/>
+</div>
+<div class="space-y-1">
+<p class="font-label-md text-on-surface truncate">Sajak Musi</p>
+<p class="text-on-surface-variant text-label-sm">R.A. Kartini</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 md:hidden bg-surface border-t border-outline-variant rounded-t-xl shadow-md">
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Beranda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-sm text-label-sm">Katalog</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-label-sm text-label-sm">Lokasi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profil</span>
+</a>
+</nav>
+<!-- Success Modal Overlay (Mock) -->
+<div class="fixed inset-0 bg-on-background/60 z-[100] hidden flex items-center justify-center p-md" id="success-overlay">
+<div class="bg-surface-container-lowest rounded-2xl p-xl max-w-sm w-full text-center space-y-md shadow-2xl scale-95 transition-transform duration-300">
+<div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined" style="font-size: 48px;">check_circle</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Lokasi Terverifikasi</h3>
+<p class="text-on-surface-variant">Anda berada di radius Titik Baca Digital. Mengalihkan Anda ke Katalog...</p>
+</div>
+</div>
+<script>
+        // GPS & Haversine Formula Logic
+        const targetCoords = { lat: -2.9901, lon: 104.7567 }; // Mock: Ampera Bridge area or nearby library
+        const btnValidate = document.getElementById('btn-validate');
+        const loadingState = document.getElementById('loading-state');
+        const actionContainer = document.getElementById('action-container');
+        const errorState = document.getElementById('error-state');
+        const successOverlay = document.getElementById('success-overlay');
+
+        function haversine(lat1, lon1, lat2, lon2) {
+            const R = 6371e3; // Earth radius in meters
+            const φ1 = lat1 * Math.PI / 180;
+            const φ2 = lat2 * Math.PI / 180;
+            const Δφ = (lat2 - lat1) * Math.PI / 180;
+            const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+            const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                      Math.cos(φ1) * Math.cos(φ2) *
+                      Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            return R * c; // returns distance in meters
+        }
+
+        btnValidate.addEventListener('click', () => {
+            // UI States
+            actionContainer.classList.add('hidden');
+            errorState.classList.add('hidden');
+            loadingState.classList.remove('hidden');
+
+            // Simulating GPS Check
+            setTimeout(() => {
+                // Mock GPS: Generates a slightly random coordinate
+                // Set chance for success/fail for demo purposes
+                const isFar = Math.random() > 0.5;
+                const mockLat = isFar ? -2.9700 : -2.9902;
+                const mockLon = isFar ? 104.7400 : 104.7568;
+
+                const distance = haversine(mockLat, mockLon, targetCoords.lat, targetCoords.lon);
+                
+                loadingState.classList.add('hidden');
+
+                if (distance > 300) {
+                    actionContainer.classList.remove('hidden');
+                    errorState.classList.remove('hidden');
+                    document.getElementById('error-message').innerText = `Anda berada di luar jangkauan (${Math.round(distance)}m). Maksimal 300m dari titik baca.`;
+                } else {
+                    successOverlay.classList.remove('hidden');
+                    successOverlay.querySelector('div').classList.remove('scale-95');
+                    successOverlay.querySelector('div').classList.add('scale-100');
+                    
+                    setTimeout(() => {
+                        window.location.href = '#catalog'; // Redirecting
+                    }, 2000);
+                }
+            }, 1500);
+        });
+
+        // Hide success modal on background click (for demo purposes)
+        successOverlay.addEventListener('click', () => {
+            successOverlay.classList.add('hidden');
+            actionContainer.classList.remove('hidden');
+        });
+    </script>
+</body></html>

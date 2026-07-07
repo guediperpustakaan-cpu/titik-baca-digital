@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kelola Buku - Titik Baca Digital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#d5e3fd",
+                      "surface-dim": "#ccdbf4",
+                      "tertiary": "#303539",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#dde9ff",
+                      "surface-container": "#e6eeff",
+                      "on-primary-fixed": "#001453",
+                      "on-surface-variant": "#444653",
+                      "surface-tint": "#3755c3",
+                      "secondary-fixed-dim": "#a4c9ff",
+                      "background": "#f8f9ff",
+                      "on-background": "#0d1c2f",
+                      "on-secondary-fixed": "#001c39",
+                      "inverse-surface": "#233144",
+                      "on-primary-container": "#a8b8ff",
+                      "secondary-fixed": "#d4e3ff",
+                      "secondary": "#0060ac",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#ebf1ff",
+                      "on-error": "#ffffff",
+                      "surface": "#f8f9ff",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c4c5d5",
+                      "primary-fixed-dim": "#b8c4ff",
+                      "inverse-primary": "#b8c4ff",
+                      "primary-container": "#1e40af",
+                      "tertiary-fixed-dim": "#c3c7cb",
+                      "on-secondary-fixed-variant": "#004883",
+                      "surface-container-highest": "#d5e3fd",
+                      "tertiary-fixed": "#dfe3e7",
+                      "on-primary-fixed-variant": "#173bab",
+                      "outline": "#757684",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#00288e",
+                      "on-tertiary-container": "#b8bcc0",
+                      "primary-fixed": "#dde1ff",
+                      "on-surface": "#0d1c2f",
+                      "tertiary-container": "#474c4f",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#f8f9ff",
+                      "on-secondary-container": "#003c70",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-container": "#64a8fe",
+                      "on-tertiary-fixed-variant": "#43474b",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#171c1f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "base": "4px",
+                      "gutter": "24px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "2xl": "48px",
+                      "3xl": "64px",
+                      "md": "16px",
+                      "container-max": "1280px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "headline-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .glass-panel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(226, 232, 240, 0.8); }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (Admin View) -->
+<aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 p-md w-64 bg-surface-container-low border-r border-outline-variant z-50">
+<div class="mb-2xl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Admin Titik Baca</h1>
+<p class="font-label-sm text-on-surface-variant">Perpustakaan Palembang</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<!-- Active State: Kelola Buku -->
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container rounded-lg font-bold translate-x-1 transition-transform font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                Kelola Buku
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">map</span>
+                Lokasi
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">group</span>
+                Pengunjung
+            </a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Pengaturan
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-error hover:bg-error-container/20 transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Keluar
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen p-margin-mobile md:p-gutter">
+<!-- Header Actions -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Manajemen Katalog Buku</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Kelola koleksi buku digital dan fisik di seluruh titik baca.</p>
+</div>
+<button class="flex items-center justify-center gap-sm bg-primary text-on-primary px-lg py-md rounded-xl font-label-md text-label-md hover:opacity-90 active:scale-95 transition-all shadow-sm" onclick="toggleModal(true)">
+<span class="material-symbols-outlined">add</span>
+                Upload Buku Baru
+            </button>
+</header>
+<!-- Search and Filter Bar -->
+<section class="glass-panel p-md rounded-2xl mb-lg shadow-sm flex flex-col md:flex-row gap-md items-center">
+<div class="relative w-full md:flex-1">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-3xl pr-md py-md bg-surface border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-sm text-body-sm" placeholder="Cari judul buku atau penulis..." type="text"/>
+</div>
+<div class="flex gap-sm w-full md:w-auto">
+<select class="flex-1 md:w-48 py-md px-md bg-surface border border-outline-variant rounded-xl font-body-sm text-body-sm focus:ring-2 focus:ring-primary">
+<option>Semua Kategori</option>
+<option>Fiksi</option>
+<option>Pendidikan</option>
+<option>Teknologi</option>
+<option>Sastra</option>
+</select>
+<button class="px-md py-md border border-outline-variant rounded-xl hover:bg-surface-variant transition-colors flex items-center gap-sm font-label-md text-label-md">
+<span class="material-symbols-outlined">filter_list</span>
+                    Filter
+                </button>
+</div>
+</section>
+<!-- Books Table Container -->
+<section class="glass-panel rounded-2xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Informasi Buku</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Penulis</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Tgl Upload</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant text-center">Status</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-16 rounded bg-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A cinematic studio shot of a book cover featuring elegant Indonesian batik patterns in gold and dark blue, with professional typography for a title about digital transformation in public services, high-end photography style, soft top lighting, pristine white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr7hhLjKLKTq1PdwM9IBwBpMCIPXze3Fwb7nRZk-PoWMJoUKxYPxfq1iwa6OQPpZMqMTJ6IVKI0y5niwMBeGdknGkoyJuUppJcQ6qma5UrFmx9B0qevf2CHtDo0WdxwgQ0VvEKP9J2ixKvoIwgztf4iSgUh3cJWkyGEF1TfUS3wZEW4nkc1ZKjOPJw1Yn66nODh5Fvgvmj3XDQbRnFTk2q3QOjqi3Wot5CkyYOrRpX7uO2qbSVTCDc"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary group-hover:underline cursor-pointer">Transformasi Digital Palembang</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kategori: Teknologi</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md font-body-sm text-body-sm">Dr. Ahmad Subarjo</td>
+<td class="px-lg py-md font-body-sm text-body-sm">12 Okt 2023</td>
+<td class="px-lg py-md text-center">
+<span class="px-sm py-1 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-full">Tersedia</span>
+</td>
+<td class="px-lg py-md text-right">
+<div class="flex items-center justify-end gap-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-16 rounded bg-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Minimalist book cover design with a single stylized bridge graphic, representing historical architecture, clean sans-serif font for an Indonesian history title, subtle cream paper texture background, professional graphic design aesthetic, soft neutral lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDJNtmtZLYNgGs_YwUyonVYmK1Ydp5yJensmCJb8HBC_tt2QoNJ_MUladIZ8u8AadgNrtOg6TcFi6ZmFGU4xyuwK3XiFF_1awmEnbUAQE_V_fOCEn6iOWY265Qxbjur19fLVSMk1OuJ_C3fcyLajbT39CtCpDR0h-Jy4t7gIvsUfB_fLTRfuTS8zHKyiYLF3SdmJsgE1kONEqdc602KWUWmeR69hDHXgMQDPdbi2o8aM_JNq53wp3v"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary group-hover:underline cursor-pointer">Sejarah Jembatan Ampera</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kategori: Sejarah</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md font-body-sm text-body-sm">Laila Sari, M.Hum</td>
+<td class="px-lg py-md font-body-sm text-body-sm">05 Okt 2023</td>
+<td class="px-lg py-md text-center">
+<span class="px-sm py-1 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-full">Tersedia</span>
+</td>
+<td class="px-lg py-md text-right">
+<div class="flex items-center justify-end gap-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-16 rounded bg-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern cookbook cover featuring vibrant colors of traditional Indonesian spices and ingredients, high-resolution food photography, bold modern typography for a culinary guide title, bright kitchen lighting, clean and professional design style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiikY7ANrlxwepxMDv1t0b23-8T-khlLNTp_lK915sL4twNj2IoCJaN79rxqe7DwX383EJohZ3-WQ0nOtXaM-QA4sK4Rn5NFhTlyRJxZD8tnNPdV7-dt5ZzC6pKFGPuLyWi4gggbo3jISk2c9sXDOHFI5ioQgfSW5Se23-u56KDS16XYXmBGv9XUM_rde3IX-q96lAoZzz4YxRkiwBTrVgEGrj_KqRxNlnpCVS3j9wW3tWVDmdfMGF"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary group-hover:underline cursor-pointer">Kuliner Khas Sumsel</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kategori: Kuliner</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md font-body-sm text-body-sm">Chef Rahman Hakim</td>
+<td class="px-lg py-md font-body-sm text-body-sm">28 Sep 2023</td>
+<td class="px-lg py-md text-center">
+<span class="px-sm py-1 bg-surface-variant text-primary text-[10px] font-bold uppercase rounded-full">Dipinjam</span>
+</td>
+<td class="px-lg py-md text-right">
+<div class="flex items-center justify-end gap-sm">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-lg flex items-center justify-between border-t border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Menampilkan 1-10 dari 124 buku</p>
+<div class="flex gap-sm">
+<button class="p-sm rounded-lg hover:bg-surface-variant text-outline disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-md py-sm bg-primary text-on-primary rounded-lg font-label-md text-label-md">1</button>
+<button class="px-md py-sm hover:bg-surface-variant rounded-lg font-label-md text-label-md">2</button>
+<button class="px-md py-sm hover:bg-surface-variant rounded-lg font-label-md text-label-md">3</button>
+<button class="p-sm rounded-lg hover:bg-surface-variant text-outline">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Upload Book Modal -->
+<div class="fixed inset-0 z-[60] hidden" id="uploadModal">
+<div class="absolute inset-0 bg-on-background/40 backdrop-blur-sm" onclick="toggleModal(false)"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl p-margin-mobile md:p-0">
+<div class="bg-surface rounded-2xl shadow-xl overflow-hidden border border-outline-variant animate-in fade-in zoom-in duration-300">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Upload Buku Baru</h3>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="toggleModal(false)">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-lg space-y-md" onsubmit="event.preventDefault(); toggleModal(false);">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Judul Buku</label>
+<input class="w-full px-md py-md bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary font-body-sm text-body-sm" placeholder="Masukkan judul lengkap" type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Nama Penulis</label>
+<input class="w-full px-md py-md bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary font-body-sm text-body-sm" placeholder="Nama pengarang" type="text"/>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">URL Cover Buku (Image)</label>
+<div class="flex gap-sm">
+<input class="flex-1 px-md py-md bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary font-body-sm text-body-sm" placeholder="https://example.com/cover.jpg" type="url"/>
+<button class="px-md border border-outline-variant rounded-xl text-on-surface-variant hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined">upload_file</span>
+</button>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">URL File Buku (PDF/EPUB)</label>
+<div class="flex gap-sm">
+<input class="flex-1 px-md py-md bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary font-body-sm text-body-sm" placeholder="https://example.com/file.pdf" type="url"/>
+<button class="px-md border border-outline-variant rounded-xl text-on-surface-variant hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Deskripsi Singkat</label>
+<textarea class="w-full px-md py-md bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary font-body-sm text-body-sm" placeholder="Sinopsis atau deskripsi buku..." rows="3"></textarea>
+</div>
+<div class="pt-lg flex gap-md">
+<button class="flex-1 py-md border border-outline-variant rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors" onclick="toggleModal(false)" type="button">Batal</button>
+<button class="flex-1 py-md bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:opacity-90 transition-all shadow-md" type="submit">Simpan Data</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Mobile Bottom NavBar (Mirroring predicted JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface border-t border-outline-variant md:hidden shadow-md rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Beranda</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-label-sm text-label-sm">Katalog</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-label-sm text-label-sm">Lokasi</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profil</span>
+</button>
+</nav>
+<script>
+        function toggleModal(show) {
+            const modal = document.getElementById('uploadModal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Simple Search Interaction Mock
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            console.log('Searching for:', e.target.value);
+            // This is where real filtering logic would go
+        });
+
+        // Delete confirmation mock
+        document.querySelectorAll('button .material-symbols-outlined').forEach(btn => {
+            if (btn.innerText === 'delete') {
+                btn.parentElement.addEventListener('click', () => {
+                    if (confirm('Apakah Anda yakin ingin menghapus buku ini?')) {
+                        const row = btn.closest('tr');
+                        row.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                        setTimeout(() => row.remove(), 500);
+                    }
+                });
+            }
+        });
+    </script>
+</body></html>

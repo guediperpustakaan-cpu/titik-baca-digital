@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Katalog - Titik Baca Digital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#d5e3fd",
+                      "surface-dim": "#ccdbf4",
+                      "tertiary": "#303539",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#dde9ff",
+                      "surface-container": "#e6eeff",
+                      "on-primary-fixed": "#001453",
+                      "on-surface-variant": "#444653",
+                      "surface-tint": "#3755c3",
+                      "secondary-fixed-dim": "#a4c9ff",
+                      "background": "#f8f9ff",
+                      "on-background": "#0d1c2f",
+                      "on-secondary-fixed": "#001c39",
+                      "inverse-surface": "#233144",
+                      "on-primary-container": "#a8b8ff",
+                      "secondary-fixed": "#d4e3ff",
+                      "secondary": "#0060ac",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#ebf1ff",
+                      "on-error": "#ffffff",
+                      "surface": "#f8f9ff",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c4c5d5",
+                      "primary-fixed-dim": "#b8c4ff",
+                      "inverse-primary": "#b8c4ff",
+                      "primary-container": "#1e40af",
+                      "tertiary-fixed-dim": "#c3c7cb",
+                      "on-secondary-fixed-variant": "#004883",
+                      "surface-container-highest": "#d5e3fd",
+                      "tertiary-fixed": "#dfe3e7",
+                      "on-primary-fixed-variant": "#173bab",
+                      "outline": "#757684",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#00288e",
+                      "on-tertiary-container": "#b8bcc0",
+                      "primary-fixed": "#dde1ff",
+                      "on-surface": "#0d1c2f",
+                      "tertiary-container": "#474c4f",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#f8f9ff",
+                      "on-secondary-container": "#003c70",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-container": "#64a8fe",
+                      "on-tertiary-fixed-variant": "#43474b",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#171c1f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "base": "4px",
+                      "gutter": "24px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "2xl": "48px",
+                      "3xl": "64px",
+                      "md": "16px",
+                      "container-max": "1280px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-xl-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .reader-modal {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        @media print {
+            body * { visibility: hidden; }
+            .reader-modal { display: none !important; }
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center px-margin-mobile md:px-gutter w-full max-w-container-max mx-auto bg-surface border-b border-outline-variant">
+<div class="flex items-center h-16 gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Titik Baca Digital</span>
+</div>
+<div class="hidden md:flex gap-lg items-center">
+<nav class="flex gap-md h-16 items-center">
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Beranda</a>
+<a class="text-primary font-bold border-b-2 border-primary px-2 py-1" href="#">Katalog</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Lokasi</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Profil</a>
+</nav>
+<div class="flex items-center gap-sm bg-surface-container px-4 py-2 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-48" placeholder="Cari buku atau penulis..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-primary">account_circle</button>
+</div>
+<div class="md:hidden flex items-center">
+<button class="material-symbols-outlined p-2">search</button>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-xl pb-32">
+<!-- Catalog Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-xl gap-md">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">Katalog Digital</h1>
+<p class="text-on-surface-variant font-body-md">Temukan ribuan koleksi buku berkualitas dari perpustakaan daerah.</p>
+</div>
+<div class="flex gap-sm overflow-x-auto no-scrollbar pb-2">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full text-label-md font-label-md">Semua</button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full text-label-md font-label-md hover:bg-surface-variant transition-colors">Sejarah</button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full text-label-md font-label-md hover:bg-surface-variant transition-colors">Sastra</button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full text-label-md font-label-md hover:bg-surface-variant transition-colors">Teknologi</button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full text-label-md font-label-md hover:bg-surface-variant transition-colors">Anak-anak</button>
+</div>
+</div>
+<!-- Book Grid -->
+<div class="bento-grid">
+<!-- Book Card 1 -->
+<div class="group cursor-pointer bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:scale-[1.02]" onclick="openReader('Laskar Pelangi', 'Andrea Hirata')">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A professional high-quality book cover for a novel titled Laskar Pelangi. The cover art features a vibrant, colorful illustration of a rainbow over a lush, tropical Indonesian landscape with school children in the foreground. The lighting is bright and optimistic, echoing a light-mode aesthetic with rich primary colors and a clean, modern layout typical of contemporary Southeast Asian literature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH9tvwfZZvVaJ-Pk_5LaoL6GPcOraD97KXT3g6LO6oqsBRMm7MyZ58XEXIoUDmofMawW5fMOQvePJ9aSEpogm_MwK2oUpp9TR_Os200u1twNLpQPr8iHpBn014fh2a6umZpjOmvUfGZ2niW0BI9K-bIqjCwurak47F2UV0QR9L5kflHY-tzt6Cg3416x5PRU0WZvd3IasJji1EHcdmumtLq5ig2RLSAGBRWF72th3j_SmLNUJPv1XT"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-on-surface line-clamp-1">Laskar Pelangi</h3>
+<p class="text-body-sm text-on-surface-variant">Andrea Hirata</p>
+<div class="mt-base flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface">4.8</span>
+<span class="mx-1 text-outline-variant">•</span>
+<span class="text-label-sm text-primary font-bold">Tersedia</span>
+</div>
+</div>
+</div>
+<!-- Book Card 2 -->
+<div class="group cursor-pointer bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:scale-[1.02]" onclick="openReader('Bumi Manusia', 'Pramoedya Ananta Toer')">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A classic, dignified book cover design for Bumi Manusia by Pramoedya Ananta Toer. The style is vintage Indonesian, featuring a sepia-toned portrait or a silhouette of a man in traditional Javanese attire against a minimalist cream background. The design is elegant, authoritative, and clean, using professional serif typography that signifies its status as a historical literary masterpiece." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHkZwWiXq5aQditL_yGO7Y_yZ5iqUDKnnGG0Uvuw5sFlOT5ReUSwFqa3ZwDG7umWrWYxkAtOcegeWjBXQ4OuQ6N4-GhH4oB97oje_Z1LWdBaAvjWTiWOMYNmxv4dlNRZz-9CBgeZlJeT3wgiG4yZNTxrfUwNi7t14rtV0abgm4NuHb1tGb-619-4Xnyr-1xHx34jA2q9jnsJd78Zx-gvMGFFvQ7azzkOJP_cji6f3MRUjIcECeeGsG"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-on-surface line-clamp-1">Bumi Manusia</h3>
+<p class="text-body-sm text-on-surface-variant">Pramoedya Ananta Toer</p>
+<div class="mt-base flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface">4.9</span>
+<span class="mx-1 text-outline-variant">•</span>
+<span class="text-label-sm text-primary font-bold">Tersedia</span>
+</div>
+</div>
+</div>
+<!-- Book Card 3 -->
+<div class="group cursor-pointer bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:scale-[1.02]" onclick="openReader('Pulang', 'Leila S. Chudori')">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A modern and atmospheric book cover for the novel Pulang by Leila S. Chudori. The design features a stylized illustration of a distant city skyline under a twilight sky, blended with culinary elements like a traditional Indonesian bowl. The color palette consists of deep blues and warm ochre, creating a mood of longing and homecoming in a sophisticated contemporary artistic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_5_nv_93jlPZh4gFRhC0kxsd3f0tmNXu85kIVhNsYtPgPrp_Egy7lSmpuWraxaSCfURzl0B93Ms9lVv1ndbdP7ELh_bLDx6qc40qQDANLIf1mo5rjJCoglpXPAUa1qOpOMclN0ky97JR8FKST6gHPRPOnFECJtwQk14Ra6wYVCFFEYCdWKtv447z8PkTXpppojoAzd_KxmBI35648kimrD4v7o5U7Xj5jT0t-IBg6-AXu09XMXONH"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-on-surface line-clamp-1">Pulang</h3>
+<p class="text-body-sm text-on-surface-variant">Leila S. Chudori</p>
+<div class="mt-base flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface">4.7</span>
+<span class="mx-1 text-outline-variant">•</span>
+<span class="text-label-sm text-primary font-bold">Tersedia</span>
+</div>
+</div>
+</div>
+<!-- Book Card 4 -->
+<div class="group cursor-pointer bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:scale-[1.02]" onclick="openReader('Negeri 5 Menara', 'A. Fuadi')">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A bright and inspiring book cover for Negeri 5 Menara. The visual features an architectural sketch of a traditional pesantren (boarding school) gateway or minarets reaching toward a blue sky. The aesthetic is clean and modern, using bright daylighting and a cheerful palette of blues and whites to convey a sense of hope and educational pursuit. The layout is minimalist with bold, friendly typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9hjuhZxxZE0fwAqHUPju_AGbF8hOTLSsl_8gXRETn6RuF-Vvh2qd_a3I0-FF4koUbR4PuNWpWBhTdgU2vzLzshrt3o4ZlsTSLSdJyHLstOoKhAys_yc7GeZrVppv1Dk2HWyS21kh5gtvhiMWKxJdHSzpEvabcYNTT5sggAaFby4uZNzQkEZzoD5lFFuVneCSkY-Df-oWc3M_9UyK_oVrf0B2n6UxAuuU5CZekYIgQPWHlzOP3mIDG"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-on-surface line-clamp-1">Negeri 5 Menara</h3>
+<p class="text-body-sm text-on-surface-variant">A. Fuadi</p>
+<div class="mt-base flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface">4.6</span>
+<span class="mx-1 text-outline-variant">•</span>
+<span class="text-label-sm text-primary font-bold">Tersedia</span>
+</div>
+</div>
+</div>
+<!-- Book Card 5 -->
+<div class="group cursor-pointer bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:scale-[1.02]" onclick="openReader('Ronggeng Dukuh Paruk', 'Ahmad Tohari')">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A rustic and traditional book cover design for Ronggeng Dukuh Paruk. The artwork features a stylized silhouette or fine-line drawing of a traditional Indonesian dancer in a rural village setting. The lighting is warm and golden, like a late afternoon sun, emphasizing a rich cultural heritage. The design is grounded in earthy tones like terracotta and deep brown, maintaining a professional institutional feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCloP3jRhkpkzuPrwjKz9wmlAjo9Hqatji3pdXdpDUocrg2P-LdbaZBn-4cM9CiupZ5tFtyyDPQDxShjyv5s7c4uC4wrQxUjYXXxO_6CHlFt6YAQk3tJE_It3NFu9XjgqkovnwIXsXDHnSgDyPhZyYLARJ4MPNaFmj-uL_BqvV2jWx10W3MwjNr5oX43SsKNsEYUeyZ6l3-_4QTm73uyB2Lbuee4p9TYSeMNqKeBNrwLbsiHMHT57B"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-on-surface line-clamp-1">Ronggeng Dukuh Paruk</h3>
+<p class="text-body-sm text-on-surface-variant">Ahmad Tohari</p>
+<div class="mt-base flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface">4.9</span>
+<span class="mx-1 text-outline-variant">•</span>
+<span class="text-label-sm text-primary font-bold">Tersedia</span>
+</div>
+</div>
+</div>
+<!-- Book Card 6 -->
+<div class="group cursor-pointer bg-surface border border-outline-variant rounded-xl overflow-hidden transition-all hover:shadow-md hover:scale-[1.02]" onclick="openReader('Supernova', 'Dee Lestari')">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern, and slightly sci-fi influenced book cover for Supernova. The art depicts a minimalist geometric constellation or an abstract cosmic spark in the center of a pristine white cover. The lighting is soft and ethereal. The design uses high-contrast typography in a professional blue, embodying a futuristic and intellectual aesthetic that appeals to urban readers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeYfzXd3FXW9VLEN3w-pJJtUhCfWLTQ4ib0m6prMYknHDbNfh3Lo3r2_BVkUPvW4Hb1YSxygIEIQCxhdph-k9RRz9NpECp8hF3DBuFYWhuqw-RgYXK2Qko2oRLXTPwpi4dAuJ5o9mvYtNrETnqWX_4KJIhPkiJzGcSfNo-RUG-wgSnbJctZbANZDICOfepgPV3v4klhjooB8ziCVzS-Bb0fgmQVHSoJ7WLufUoWX8dMzbdjVCK6r10"/>
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-white/90 p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-label-md text-label-md text-on-surface line-clamp-1">Supernova</h3>
+<p class="text-body-sm text-on-surface-variant">Dee Lestari</p>
+<div class="mt-base flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface">4.5</span>
+<span class="mx-1 text-outline-variant">•</span>
+<span class="text-label-sm text-primary font-bold">Tersedia</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 md:hidden bg-surface border-t border-outline-variant shadow-md rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm">Beranda</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined">library_books</span>
+<span class="text-label-sm font-label-sm">Katalog</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">location_on</span>
+<span class="text-label-sm font-label-sm">Lokasi</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">Profil</span>
+</div>
+</nav>
+<!-- Full-screen Book Reader Modal -->
+<div class="reader-modal fixed inset-0 z-[100] bg-surface hidden flex-col transition-opacity duration-300 opacity-0 overflow-hidden" id="bookReader">
+<!-- Reader Header -->
+<header class="flex items-center justify-between px-lg py-md border-b border-outline-variant bg-surface">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined hover:bg-surface-variant p-2 rounded-full transition-colors" onclick="closeReader()">arrow_back</button>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface leading-tight" id="readerTitle">Judul Buku</h2>
+<p class="text-label-sm text-on-surface-variant leading-tight" id="readerAuthor">Nama Penulis</p>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex items-center gap-sm bg-surface-container-low px-4 py-1.5 rounded-full border border-outline-variant">
+<button class="material-symbols-outlined text-[20px] text-outline">remove</button>
+<span class="text-label-md font-label-md w-12 text-center">100%</span>
+<button class="material-symbols-outlined text-[20px] text-outline">add</button>
+</div>
+<div class="flex gap-base">
+<button class="material-symbols-outlined hover:bg-surface-variant p-2 rounded-full transition-colors">brightness_4</button>
+<button class="material-symbols-outlined hover:bg-surface-variant p-2 rounded-full transition-colors">bookmark_add</button>
+<button class="material-symbols-outlined hover:bg-surface-variant p-2 rounded-full transition-colors">settings</button>
+</div>
+</div>
+</header>
+<!-- Reading Canvas -->
+<div class="flex-1 bg-surface-dim overflow-y-auto p-md md:p-xl flex justify-center no-scrollbar">
+<div class="max-w-[800px] w-full bg-white shadow-xl min-h-[1200px] p-xl md:p-3xl rounded-sm">
+<!-- Book Content Placeholder -->
+<article class="prose prose-slate max-w-none text-on-surface selection:bg-secondary-container">
+<h1 class="text-3xl font-bold mb-xl" id="contentHeading">Bab 1: Pendahuluan</h1>
+<p class="mb-lg leading-relaxed text-lg">
+                        Di sebuah perkampungan terpencil, cahaya matahari pagi baru saja menyentuh pucuk-pucuk pohon kelapa. Udara masih terasa dingin dan lembap, menyisakan embun yang bergantung mesra di dedaunan. Penduduk desa mulai terbangun, diiringi suara kokok ayam yang saling bersahutan, menandakan dimulainya siklus kehidupan yang baru.
+                    </p>
+<p class="mb-lg leading-relaxed text-lg">
+                        Tokoh utama kita, yang telah lama menunggu momen ini, berdiri di ambang jendela kayu tuanya. Tatapannya jauh menembus kabut tipis, seolah mencari jawaban atas pertanyaan yang telah bertahun-tahun mengusik benaknya. Hatinya berdebar kencang, sebuah campuran antara rasa takut dan kegembiraan yang luar biasa.
+                    </p>
+<div class="flex justify-center my-2xl">
+<div class="w-24 h-0.5 bg-outline-variant"></div>
+</div>
+<p class="mb-lg leading-relaxed text-lg italic text-center">
+                        "Kadang kala, perjalanan yang paling jauh bukanlah menuju ke tempat yang baru, melainkan kembali ke diri kita sendiri."
+                    </p>
+<p class="mb-lg leading-relaxed text-lg">
+                        Ia menghela napas panjang. Keputusannya sudah bulat. Tas ransel kulit yang sudah usang namun kuat tergeletak di samping tempat tidur, sudah terisi penuh dengan perbekalan sederhana dan sebuah peta tua yang warnanya sudah menguning. Langkah pertamanya dimulai hari ini.
+                    </p>
+<!-- More text to enable scrolling -->
+<p class="mb-lg leading-relaxed text-lg">
+                        Sepanjang jalan setapak, ia menyapa tetangga-tetangganya dengan senyuman yang sedikit dipaksakan. Mereka tidak tahu apa yang sedang ia rencanakan, dan mungkin itu lebih baik. Rahasia ini terlalu besar untuk dibagikan sekarang.
+                    </p>
+<p class="mb-lg leading-relaxed text-lg">
+                        Angin sepoi-sepoi membawa aroma tanah basah dan melati. Di kejauhan, pegunungan berdiri dengan gagah, puncaknya masih tertutup awan putih yang tebal. Ke sanalah tujuannya. Sebuah tempat yang sering disebut-sebut dalam legenda desa sebagai 'Puncak Harapan'. Banyak yang pergi, namun sedikit yang kembali dengan cerita yang utuh.
+                    </p>
+<p class="mb-lg leading-relaxed text-lg">
+                        Setiap langkah yang ia ambil terasa berat namun penuh kepastian. Di bawah kakinya, kerikil kecil berderik, menciptakan simfoni alam yang menemaninya dalam kesunyian. Ia tidak lagi menoleh ke belakang. Rumah yang telah memberinya perlindungan selama dua puluh tahun kini hanya menjadi titik kecil di kejauhan.
+                    </p>
+</article>
+</div>
+</div>
+<!-- Reader Footer / Progress -->
+<footer class="bg-surface px-lg py-base border-t border-outline-variant flex items-center gap-md">
+<span class="text-label-sm text-on-surface-variant shrink-0">Hal 1 dari 240</span>
+<div class="flex-1 h-1 bg-surface-container rounded-full relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full bg-primary w-1/12 transition-all duration-300"></div>
+</div>
+<div class="flex gap-sm">
+<button class="material-symbols-outlined text-on-surface-variant p-1">chevron_left</button>
+<button class="material-symbols-outlined text-on-surface-variant p-1">chevron_right</button>
+</div>
+</footer>
+</div>
+<script>
+        // Reader Modal Logic
+        const readerModal = document.getElementById('bookReader');
+        const readerTitle = document.getElementById('readerTitle');
+        const readerAuthor = document.getElementById('readerAuthor');
+        const contentHeading = document.getElementById('contentHeading');
+
+        function openReader(title, author) {
+            readerTitle.textContent = title;
+            readerAuthor.textContent = author;
+            contentHeading.textContent = `Bab 1: Awal Mula ${title}`;
+            
+            readerModal.classList.remove('hidden');
+            // Force reflow
+            readerModal.offsetHeight;
+            readerModal.classList.add('flex');
+            readerModal.classList.remove('opacity-0');
+            readerModal.classList.add('opacity-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReader() {
+            readerModal.classList.remove('opacity-100');
+            readerModal.classList.add('opacity-0');
+            setTimeout(() => {
+                readerModal.classList.add('hidden');
+                readerModal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Security: Disable Right Click in Modal
+        readerModal.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Security: Disable common copy shortcuts when modal is open
+        document.addEventListener('keydown', function(e) {
+            if (!readerModal.classList.contains('hidden')) {
+                // Prevent Ctrl+P, Ctrl+S, Ctrl+C, Ctrl+U
+                if (e.ctrlKey && (e.key === 'p' || e.key === 's' || e.key === 'c' || e.key === 'u')) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
+
+        // Simple animation for the grid items entrance
+        window.onload = () => {
+            const cards = document.querySelectorAll('.bento-grid > div');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.4s ease ${index * 0.1}s`;
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        };
+    </script>
+</body></html>

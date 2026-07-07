@@ -1,7 +1,13 @@
+import { useEffect, useState } from 'react'
 import { Icon } from '../Icon'
+import { supabase } from '../../lib/supabase'
 
-const BOOK_COVER =
+const FALLBACK_COVER =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBB2_AbnitiwirsLVMbOxUcJC1yP-jQNONLMsaICf2rlGgJ71X7Wvy6Vcvq2WLfiZUHWLqCgPF8vww185KjtVCm0UYmKcxjtDRe8I_4rwBkWC8I1CUJJOCp6s6OP7VSRyTXdtB31PCcHlmwYnltwXuCwxRwT4vhNAPN2WkVUpXspSqBpJ2XVd8TDdYAHJPAuWRs1TGr79VkRlEUGU4ddMX9sHJQjFnyh5wbEcC87aD37mc24DYEDCH6'
+
+function todayISO() {
+  return new Date().toISOString().slice(0, 10)
+}
 
 function StatCard({ label, value, children, icon, iconClass }) {
   return (
@@ -21,11 +27,53 @@ function StatCard({ label, value, children, icon, iconClass }) {
 }
 
 export default function StatsBento() {
+  const [total, setTotal] = useState(12482)
+  const [popular, setPopular] = useState({
+    title: 'Sejarah Palembang Modern',
+    reads: 124,
+    cover: FALLBACK_COVER,
+  })
+  const [today, setToday] = useState(847)
+
+  useEffect(() => {
+    let cancelled = false
+    async function load() {
+      const [countRes, popRes, todayRes] = await Promise.all([
+        supabase.from('books').select('*', { count: 'exact', head: true }),
+        supabase
+          .from('books')
+          .select('title, reads_today, cover_url')
+          .order('reads_today', { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+        supabase
+          .from('visitor_stats')
+          .select('visitor_count')
+          .eq('stat_date', todayISO())
+          .maybeSingle(),
+      ])
+      if (cancelled) return
+      if (!countRes.error && countRes.count != null) setTotal(countRes.count)
+      if (!popRes.error && popRes.data) {
+        setPopular({
+          title: popRes.data.title,
+          reads: popRes.data.reads_today,
+          cover: popRes.data.cover_url || FALLBACK_COVER,
+        })
+      }
+      if (!todayRes.error && todayRes.data) setToday(todayRes.data.visitor_count)
+    }
+    load().catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl">
       <StatCard
         label="Total Buku"
-        value="12,482"
+        value={total.toLocaleString('id-ID')}
         icon="library_books"
         iconClass="bg-primary-fixed text-primary"
       >
@@ -36,7 +84,7 @@ export default function StatsBento() {
 
       <StatCard
         label="Pengunjung Hari Ini"
-        value="847"
+        value={today.toLocaleString('id-ID')}
         icon="person"
         iconClass="bg-secondary-fixed text-on-secondary-container"
       >
@@ -49,8 +97,8 @@ export default function StatsBento() {
         <div className="flex-shrink-0 w-16 h-20 rounded bg-surface-dim overflow-hidden shadow-sm">
           <img
             className="w-full h-full object-cover"
-            src={BOOK_COVER}
-            alt="Sampul buku Sejarah Palembang Modern"
+            src={popular.cover}
+            alt={`Sampul buku ${popular.title}`}
           />
         </div>
         <div className="flex-1 min-w-0">
@@ -58,10 +106,10 @@ export default function StatsBento() {
             Buku Terpopuler
           </p>
           <h3 className="text-body-lg font-bold text-primary truncate">
-            Sejarah Palembang Modern
+            {popular.title}
           </h3>
           <p className="text-on-surface-variant text-label-sm truncate">
-            Dibaca 124 kali hari ini
+            Dibaca {popular.reads} kali hari ini
           </p>
         </div>
       </div>

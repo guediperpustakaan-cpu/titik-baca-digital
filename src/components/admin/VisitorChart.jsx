@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { supabase } from '../../lib/supabase'
 
-const VISITOR_DATA_7 = [
+const FALLBACK_7 = [
   { day: 'Sen', value: 420, height: '60%', bar: 'bg-primary-container/20' },
   { day: 'Sel', value: 310, height: '45%', bar: 'bg-primary-container/20' },
   { day: 'Rab', value: 640, height: '85%', bar: 'bg-primary-container/40' },
@@ -10,25 +11,48 @@ const VISITOR_DATA_7 = [
   { day: 'Min', value: 380, height: '55%', bar: 'bg-primary-container/20' },
 ]
 
-const VISITOR_DATA_30 = [
-  { day: 'M1', value: 290, height: '40%', bar: 'bg-primary-container/20' },
-  { day: 'M5', value: 510, height: '70%', bar: 'bg-primary-container/40' },
-  { day: 'M10', value: 470, height: '65%', bar: 'bg-primary-container/20' },
-  { day: 'M15', value: 680, height: '92%', bar: 'bg-primary-container/30' },
-  { day: 'M20', value: 540, height: '74%', bar: 'bg-primary-container/20' },
-  { day: 'M25', value: 720, height: '98%', bar: 'bg-primary' },
-  { day: 'M30', value: 600, height: '82%', bar: 'bg-primary-container/20' },
-]
+function buildRows(data) {
+  if (!data || data.length === 0) return FALLBACK_7
+  const max = Math.max(...data.map((d) => d.visitor_count), 1)
+  return data.map((d) => {
+    const value = d.visitor_count
+    const isMax = value === max
+    return {
+      day: d.day_label,
+      value,
+      height: `${Math.max(8, Math.round((value / max) * 100))}%`,
+      bar: isMax ? 'bg-primary' : 'bg-primary-container/30',
+    }
+  })
+}
 
 export default function VisitorChart() {
   const [range, setRange] = useState('7')
+  const [rows, setRows] = useState(FALLBACK_7)
   const [mounted, setMounted] = useState(false)
 
-  const data = range === '7' ? VISITOR_DATA_7 : VISITOR_DATA_30
-
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 100)
-    return () => clearTimeout(t)
+    let cancelled = false
+    async function load() {
+      const { data, error } = await supabase
+        .from('visitor_stats')
+        .select('day_label, visitor_count')
+        .order('stat_date', { ascending: true })
+        .limit(range === '7' ? 7 : 30)
+      if (cancelled) return
+      if (!error && data) {
+        setRows(buildRows(data))
+      } else {
+        setRows(FALLBACK_7)
+      }
+      setMounted(true)
+    }
+    load().catch(() => {
+      if (!cancelled) setMounted(true)
+    })
+    return () => {
+      cancelled = true
+    }
   }, [range])
 
   return (
@@ -55,7 +79,7 @@ export default function VisitorChart() {
           <div className="border-t border-on-surface"></div>
         </div>
 
-        {data.map((d) => (
+        {rows.map((d) => (
           <div
             key={d.day}
             className={`w-full ${d.bar} rounded-t-lg chart-bar hover:bg-primary transition-colors cursor-pointer group relative`}
@@ -72,7 +96,7 @@ export default function VisitorChart() {
       </div>
 
       <div className="flex justify-between text-label-sm text-on-surface-variant px-2">
-        {data.map((d) => (
+        {rows.map((d) => (
           <span key={d.day}>{d.day}</span>
         ))}
       </div>

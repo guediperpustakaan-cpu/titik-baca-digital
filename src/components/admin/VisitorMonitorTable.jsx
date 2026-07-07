@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { supabase } from '../../lib/supabase'
 
-const VISITORS = [
+const FALLBACK = [
   {
     initials: 'AN',
     avatarClass: 'bg-primary-fixed text-primary',
@@ -33,42 +34,66 @@ const VISITORS = [
   },
 ]
 
-const MORE_VISITORS = [
-  {
-    initials: 'DW',
-    avatarClass: 'bg-primary-fixed text-primary',
-    name: 'Dewi Lestari',
-    id: '48230',
-    book: 'Sejarah Palembang Modern',
-    start: '13:20 WIB',
-    status: 'Aktif',
-    statusClass: 'bg-surface-container-highest text-primary',
-  },
-  {
-    initials: 'RA',
-    avatarClass: 'bg-secondary-fixed text-on-secondary-container',
-    name: 'Rangga Aditya',
-    id: '48241',
-    book: 'Kuliner Palembang',
-    start: '13:02 WIB',
-    status: 'Idle',
-    statusClass: 'bg-surface-container-low text-on-surface-variant',
-  },
-  {
-    initials: 'FS',
-    avatarClass: 'bg-tertiary-fixed text-tertiary',
-    name: 'Fitri Sari',
-    id: '48255',
-    book: 'Sajak Musi',
-    start: '12:48 WIB',
-    status: 'Aktif',
-    statusClass: 'bg-surface-container-highest text-primary',
-  },
-]
+function initialsOf(name) {
+  return name
+    .split(' ')
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase()
+}
+
+function formatWIB(iso) {
+  const d = new Date(iso)
+  const wib = new Date(d.getTime() + 7 * 3600 * 1000)
+  return wib.toISOString().slice(11, 16) + ' WIB'
+}
+
+function mapVisitor(v, index) {
+  const isActive = v.status === 'active'
+  const palette = [
+    'bg-primary-fixed text-primary',
+    'bg-secondary-fixed text-on-secondary-container',
+    'bg-tertiary-fixed text-tertiary',
+  ]
+  return {
+    initials: initialsOf(v.name),
+    avatarClass: palette[index % palette.length],
+    name: v.name,
+    id: v.member_code,
+    book: v.book_title,
+    start: formatWIB(v.started_at),
+    status: isActive ? 'Aktif' : 'Idle',
+    statusClass: isActive
+      ? 'bg-surface-container-highest text-primary'
+      : 'bg-surface-container-low text-on-surface-variant',
+  }
+}
 
 export default function VisitorMonitorTable({ onDetail }) {
+  const [rows, setRows] = useState(FALLBACK)
   const [showAll, setShowAll] = useState(false)
-  const rows = showAll ? [...VISITORS, ...MORE_VISITORS] : VISITORS
+
+  useEffect(() => {
+    let cancelled = false
+    async function load() {
+      const { data, error } = await supabase
+        .from('active_visitors')
+        .select('*')
+        .order('started_at', { ascending: false })
+      if (cancelled) return
+      if (!error && data && data.length > 0) {
+        setRows(data.map(mapVisitor))
+      }
+    }
+    load().catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const visible = showAll ? rows : rows.slice(0, 3)
+  const activeCount = rows.filter((r) => r.status === 'Aktif').length
 
   return (
     <section className="mt-xl bg-surface border border-outline-variant rounded-xl shadow-[0px_2px_4px_rgba(0,0,0,0.05)] overflow-hidden">
@@ -78,7 +103,7 @@ export default function VisitorMonitorTable({ onDetail }) {
         </h3>
         <div className="flex gap-2">
           <span className="flex items-center gap-2 text-label-sm text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-200">
-            <span className="w-2 h-2 rounded-full bg-green-500"></span> 12 Aktif
+            <span className="w-2 h-2 rounded-full bg-green-500"></span> {activeCount} Aktif
           </span>
         </div>
       </div>
@@ -100,7 +125,7 @@ export default function VisitorMonitorTable({ onDetail }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-outline-variant">
-            {rows.map((v) => (
+            {visible.map((v) => (
               <tr key={v.id} className="hover:bg-background transition-colors">
                 <td className="px-lg py-md">
                   <div className="flex items-center gap-3">
